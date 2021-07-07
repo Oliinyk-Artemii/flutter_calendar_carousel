@@ -477,7 +477,10 @@ class _CalendarState<T extends EventInterface>
               : isToday && widget.todayButtonColor != null
                   ? widget.todayButtonColor
                   : widget.dayButtonColor,
-          onPressed: widget.disableDayPressed ? null : () => _onDayPressed(now),
+          onPressed:
+              widget.disableDayPressed || isPrevMonthDay || isNextMonthDay
+                  ? null
+                  : () => _onDayPressed(now),
           padding: EdgeInsets.all(widget.dayPadding),
           shape: widget.markedDateCustomShapeBorder != null &&
                   markedDatesMap != null &&
@@ -1162,8 +1165,16 @@ class _CalendarState<T extends EventInterface>
 
       final styleForBuilder = appTextStyle.merge(dayStyle);
 
-      dayContainer = customDayBuilder(isSelectable, index, isSelectedDay, isToday,
-          isPrevMonthDay, styleForBuilder, isNextMonthDay, isThisMonthDay, now);
+      dayContainer = customDayBuilder(
+          isSelectable,
+          index,
+          isSelectedDay,
+          isToday,
+          isPrevMonthDay,
+          styleForBuilder,
+          isNextMonthDay,
+          isThisMonthDay,
+          now);
     }
 
     return dayContainer ??
