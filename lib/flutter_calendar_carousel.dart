@@ -125,7 +125,9 @@ class CalendarCarousel<T extends EventInterface> extends StatefulWidget {
   final bool headerTitleTouchable;
   final Function? onHeaderTitlePressed;
   final Function? onLeftArrowPressed;
+  final bool Function()? disableLeftButtonIf;
   final Function? onRightArrowPressed;
+  final bool Function()? disableRightButtonIf;
   final WeekdayFormat weekDayFormat;
   final bool staticSixWeekFormat;
   final bool isScrollable;
@@ -205,7 +207,9 @@ class CalendarCarousel<T extends EventInterface> extends StatefulWidget {
     this.headerTitleTouchable = false,
     this.onHeaderTitlePressed,
     this.onLeftArrowPressed,
+    this.disableLeftButtonIf,
     this.onRightArrowPressed,
+    this.disableRightButtonIf,
     this.weekDayFormat = WeekdayFormat.short,
     this.staticSixWeekFormat = false,
     this.isScrollable = true,
@@ -342,7 +346,9 @@ class _CalendarState<T extends EventInterface>
             showHeaderButtons: widget.showHeaderButton,
             headerIconColor: widget.iconColor,
             leftButtonIcon: widget.leftButtonIcon,
+            disableLeftButtonIf: widget.disableLeftButtonIf,
             rightButtonIcon: widget.rightButtonIcon,
+            disableRightButtonIf: widget.disableRightButtonIf,
             onLeftButtonPressed: () {
               widget.onLeftArrowPressed?.call();
 
