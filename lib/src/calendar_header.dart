@@ -38,15 +38,15 @@ class CalendarHeader extends StatelessWidget {
 
   Widget _leftButton() => IconButton(
         onPressed:
-            (disableLeftButtonIf ?? () => true)() ? onLeftButtonPressed : null,
+            (disableLeftButtonIf ?? () => false)() ? null : onLeftButtonPressed,
         icon:
             leftButtonIcon ?? Icon(Icons.chevron_left, color: headerIconColor),
       );
 
   Widget _rightButton() => IconButton(
-        onPressed: (disableRightButtonIf ?? () => true)()
-            ? onRightButtonPressed
-            : null,
+        onPressed: (disableRightButtonIf ?? () => false)()
+            ? null
+            : onRightButtonPressed,
         icon: rightButtonIcon ??
             Icon(Icons.chevron_right, color: headerIconColor),
       );
