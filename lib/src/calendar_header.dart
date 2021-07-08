@@ -13,7 +13,9 @@ class CalendarHeader extends StatelessWidget {
       this.leftButtonIcon,
       this.rightButtonIcon,
       required this.onLeftButtonPressed,
+      this.disableLeftButtonIf,
       required this.onRightButtonPressed,
+      this.disableRightButtonIf,
       this.onHeaderTitlePressed})
       : isTitleTouchable = onHeaderTitlePressed != null;
 
@@ -26,20 +28,25 @@ class CalendarHeader extends StatelessWidget {
   final Widget? leftButtonIcon;
   final Widget? rightButtonIcon;
   final VoidCallback onLeftButtonPressed;
+  final bool Function()? disableLeftButtonIf;
   final VoidCallback onRightButtonPressed;
+  final bool Function()? disableRightButtonIf;
   final bool isTitleTouchable;
   final VoidCallback? onHeaderTitlePressed;
 
   TextStyle get getTextStyle => headerTextStyle ?? defaultHeaderTextStyle;
 
   Widget _leftButton() => IconButton(
-        onPressed: onLeftButtonPressed,
+        onPressed:
+            (disableLeftButtonIf ?? () => true)() ? onLeftButtonPressed : null,
         icon:
             leftButtonIcon ?? Icon(Icons.chevron_left, color: headerIconColor),
       );
 
   Widget _rightButton() => IconButton(
-        onPressed: onRightButtonPressed,
+        onPressed: (disableRightButtonIf ?? () => true)()
+            ? onRightButtonPressed
+            : null,
         icon: rightButtonIcon ??
             Icon(Icons.chevron_right, color: headerIconColor),
       );
